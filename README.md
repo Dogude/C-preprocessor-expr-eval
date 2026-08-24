@@ -1,17 +1,16 @@
 # Program uses shunting yard algorithm to interpret C #if expressions
 * It holds a Precedence Dictionary
-  ```
-   precedence = {
-    '!': 4 , 'defined': 4 , '!defined': 4, '*': 3, '/': 3, '%': 3, '+': 2, '-': 2, '<<': 1, '>>': 1,
-    '<': 0, '>': 0, '<=': 0, '>=': 0, '==': -1, '!=': -1, '&&': -2, '||': -3 , '&': -4 , '|': -5,
-    '(': -6 , ')': -6
-
-    }
-  ```
 # Examples
-* Example assumes necessary define replacements has done.
+* ``` c_eval ``` function has a lexer, parser and eval loop 
 * If still an identifier in this expression, it means it has not defined and treated as 0 in eval loop
 * so in that example B will be treated as 0
+* ``` defined ```  operator can not take a only number, it must take a identifier
+* Below Expression will output syntax error
+```
+expr = "!defined(123)"
+print(c_eval(expr))
+```
+<img width="176" height="41" alt="image" src="https://github.com/user-attachments/assets/8d20f22b-ab58-4d1a-852e-53642e6ac64e" />
 
 ```
 expr = "!defined(B) && 123 > 1257"
