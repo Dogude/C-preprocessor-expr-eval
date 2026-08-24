@@ -8,7 +8,64 @@ class Types:
     E = 5
     F = 6
     G = 7
+
+# Precedence dictionary
+precedence = {
+    'defined': 14, 
+    '~': 14,
+    '-u': 14,  
+    '+u': 14,  
+        
+    '!': 14,
+    '*': 13,
+    '/': 13,
+    '%': 13,
     
+        
+    '+': 12,
+    '-': 12,
+    
+        
+    '<<': 11,
+    '>>': 11,
+    
+        
+    '<': 10,
+    '>': 10,
+    '<=': 10,
+    '>=': 10,
+    
+        
+    '==': 9,
+    '!=': 9,
+    
+        
+    '&': 8,
+    '^': 7,
+    '|': 6,
+    
+        
+    '&&': 5,
+    '||': 4
+}
+
+associativity = {
+    '*': 'L', '/': 'L', '%': 'L', '+': 'L', '-': 'L',
+    '<<': 'L', '>>': 'L', '<': 'L', '>': 'L', '<=': 'L', '>=': 'L',
+    '==': 'L', '!=': 'L', '&': 'L', '^': 'L', '|': 'L', '&&': 'L', '||': 'L',
+    
+  
+    'defined': 'R', '!': 'R', '~': 'R', '-u': 'R', '+u': 'R'
+}
+
+def check_assoc(token,stack):
+    assoc = None
+    if associativity[token] == 'R':
+        assoc = precedence[stack[-1]] > precedence[token]
+    else:
+        assoc = precedence[stack[-1]] >= precedence[token]
+    return assoc
+
 def c_eval(expression):
 
     # expression is a string
@@ -113,47 +170,6 @@ def c_eval(expression):
         print("error in expression9")
         return
 
-     
-    # Precedence dictionary
-    precedence = {
-        'defined': 14, 
-        '~': 14,
-        '-u': 14,  
-        '+u': 14,  
-        
-        '!': 14,
-        '*': 13,
-        '/': 13,
-        '%': 13,
-    
-        
-        '+': 12,
-        '-': 12,
-    
-        
-        '<<': 11,
-        '>>': 11,
-    
-        
-        '<': 10,
-        '>': 10,
-        '<=': 10,
-        '>=': 10,
-    
-        
-        '==': 9,
-        '!=': 9,
-    
-        
-        '&': 8,
-        '^': 7,
-        '|': 6,
-    
-        
-        '&&': 5,
-        '||': 4
-    }
-
     output = []
     stack = []
 
@@ -168,8 +184,9 @@ def c_eval(expression):
                 output.append(stack.pop())
             stack.pop()  # Pop the '(' from the stack
         elif token in precedence:
+            
             while (stack and stack[-1] != '(' and
-                   precedence[stack[-1]] > precedence[token]):
+                   check_assoc(token,stack)):
                 output.append(stack.pop())
             stack.append(token)
     while stack:
@@ -276,6 +293,5 @@ def c_eval(expression):
 
 
 #if
-expr = "10 - 10 + 2 - 2"
-
+expr = "12 + 23 - 23"
 print(c_eval(expr))
