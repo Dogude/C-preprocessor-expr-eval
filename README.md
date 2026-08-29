@@ -1,9 +1,9 @@
-# Program uses shunting yard algorithm to interpret C #if expressions
+# Program uses shunting yard algorithm to interpret C Preprocessor #if boolean expressions
 * It holds a Precedence Dictionary
 # Examples
 * ``` c_eval ``` function has a lexer, parser and eval loop 
-* ``` defined ```  operator can not take a only number, it must take a identifier
-* Below Expression will output syntax error
+* ``` defined ```  operator cannot take only a number, it must take an identifier
+* Below Expression will output a syntax error
 ```
 expr = "!defined(123)"
 print(c_eval(expr))
