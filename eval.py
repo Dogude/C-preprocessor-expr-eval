@@ -58,6 +58,27 @@ associativity = {
     'defined': 'R', '!': 'R', '~': 'R', '-u': 'R', '+u': 'R'
 }
 
+def print_error(tokens,index):
+    for t in tokens:
+        if t == '-u':
+            print('-',end=" ")
+        elif t == '+u':
+            print('+',end=" ")
+        else:
+            print(t,end=" ")
+    
+    print()
+
+    for i in range(len(tokens)):
+        if i < index:
+            print(" " * len(tokens[i]), end = " ")
+    
+    print('^')    
+        
+    print() 
+    
+
+
 def check_assoc(token,stack):
     assoc = None
     if associativity[token] == 'R':
@@ -107,30 +128,34 @@ def c_eval(expression):
                 elif t.isnumeric() or t.isidentifier():
                     state = Types.OPERATOR                   
                 else:
-                    print("error in expression1")
+                    print("[ !,defined,-,+,~,(,NUMBER,NAME ] expected")
+                    print_error(tokens,i)
                     return 
             
             case Types.D:
                 if t == '(':
                     state = Types.E
-                elif t.isidentifier():
+                elif t != 'defined' and t.isidentifier():
                     state = Types.OPERATOR
                 else:
-                    print("error in expression2")
+                    print("must be : defined NAME")
+                    print_error(tokens,i)
                     return 
             
             case Types.E:
-                if t.isidentifier():
+                if t != 'defined' and t.isidentifier():
                     state = Types.G
                 else:
-                    print("error in expression3")
+                    print("must be : defined(NAME)")
+                    print_error(tokens,i)
                     return 
             
             case Types.G:
                 if t == ')':
                     state = Types.OPERATOR
                 else:
-                    print("error in expression4")
+                    print("must be : defined(NAME)")
+                    print_error(tokens,i)
                     return 
             
             case Types.C:
@@ -145,10 +170,11 @@ def c_eval(expression):
                 elif t == '(':
                     state = Types.OPERAND
                     par.append(1)
-                elif t.isnumeric() or t.isidentifier():
+                elif t != 'defined' and (t.isnumeric() or t.isidentifier()):
                     state = Types.OPERATOR
                 else:
-                    print("error in expression5")
+                    print("[ !,-,+,~,(,NUMBER,NAME ] expected")
+                    print_error(tokens,i)
                     return 
             
             case Types.OPERATOR:
@@ -156,18 +182,22 @@ def c_eval(expression):
                     state = Types.OPERAND
                 elif t == ')':
                     if par is None:
-                        print("error in expression6")
+                        print("Opening Parantheses Error")
+                        print_error(tokens,0)
                         return
                     par.pop()    
                 else:
-                    print("error in expression7")
+                    print("Operator Expected")
+                    print_error(tokens,i)
                     return
     
     if state != Types.OPERATOR:     
-        print("error in expression8")
+        print("Expression must end")
+        print_error(tokens,i)
         return
     elif par:
-        print("error in expression9")
+        print("Parantheses Mismatch")
+        print_error(tokens,i)
         return
 
     output = []
@@ -289,9 +319,10 @@ def c_eval(expression):
     
     result = eval_stack.pop()
     output = True if result is None else result
+    print(bool(output))
     return bool(output)
 
 
 #if
-expr = "12 + 23 - 23"
-print(c_eval(expr))
+expr = "!defined(AAA) && F > H +"
+c_eval(expr)
