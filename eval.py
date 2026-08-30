@@ -318,9 +318,8 @@ def c_eval(expression):
             eval_stack.append(a ^ b)
     
     result = eval_stack.pop()
-    output = True if result is None else result
-    print(bool(output))
-    return bool(output)
+    print(bool(result))
+    return bool(result)
 
 
 #if
