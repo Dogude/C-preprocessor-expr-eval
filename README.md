@@ -11,6 +11,12 @@ c_eval(expr)
 <img width="291" height="83" alt="image" src="https://github.com/user-attachments/assets/b83c3296-3d14-4aa5-95fb-6308f0a42b5d" />
 
 ```
+expr = "F > 12.3"
+c_eval(expr)
+```
+<img width="235" height="77" alt="image" src="https://github.com/user-attachments/assets/7ad73bb2-b605-43dd-a56a-74b85e78b2c8" />
+
+```
 expr = "!defined(AAA) && F > H +"
 c_eval(expr)
 ```
