@@ -181,7 +181,7 @@ def c_eval(expression):
                 if t in ('&&' , '||' , '==' , '!=' , '&' ,  '|'  , '<<' , '>>' , '<' , '>' , '>=' , '<=' ,  '+' , '-' , '/' , '%' , '*' , '^'):
                     state = Types.OPERAND
                 elif t == ')':
-                    if par is None:
+                    if not par:
                         print("Opening Parantheses Error")
                         print_error(tokens,0)
                         return
