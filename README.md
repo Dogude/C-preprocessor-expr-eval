@@ -34,14 +34,13 @@ c_eval(expr)
 * For Example below, B will be treated as 0
 ```
 expr = "!defined(B) && 123 > 1257"
-c_eval(expr)
-Outputs : False
+c_eval(expr) # False
 ```
+
 * Also FOO and F Treated as 0
 ```
 expr = "!defined(FOO) && 123678 > 1257 || F + 12"
-print(c_eval(expr))
-Outputs : True
+c_eval(expr) # True
 ```
 
 
