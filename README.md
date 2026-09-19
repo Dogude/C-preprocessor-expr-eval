@@ -11,6 +11,13 @@ c_eval(expr)
 <img width="291" height="83" alt="image" src="https://github.com/user-attachments/assets/b83c3296-3d14-4aa5-95fb-6308f0a42b5d" />
 
 ```
+expr = "~ defined(TEST)"
+c_eval(expr)
+
+```
+<img width="450" height="92" alt="image" src="https://github.com/user-attachments/assets/951d33b0-eeab-4060-ade6-ee578853813b" />
+
+```
 expr = "F > 12.3"
 c_eval(expr)
 ```
