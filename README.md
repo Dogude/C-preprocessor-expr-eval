@@ -1,8 +1,7 @@
 # Program uses shunting yard algorithm to interpret C Preprocessor (#if, #elif) boolean expressions
-* It holds a Precedence Dictionary
 # Examples
-* ``` c_eval ``` function has a lexer, parser and eval loop 
-* ``` defined ```  operator cannot take only a number, it must take an identifier
+* `c_eval`  function implements Parser(with Precedence of all operators such as `defined`  `!`  `|`  `>>` ...)
+* `defined`  operator must take only an identifier
 * Below Expression will output a syntax error
 ```
 expr = "!defined(456)"
