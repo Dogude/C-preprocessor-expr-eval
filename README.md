@@ -1,4 +1,4 @@
-# Program uses shunting yard algorithm to interpret C Preprocessor #if boolean expressions
+# Program uses shunting yard algorithm to interpret C Preprocessor (#if, #elif) boolean expressions
 * It holds a Precedence Dictionary
 # Examples
 * ``` c_eval ``` function has a lexer, parser and eval loop 
