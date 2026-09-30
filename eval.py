@@ -318,10 +318,9 @@ def c_eval(expression):
             eval_stack.append(a ^ b)
     
     result = eval_stack.pop()
-    print(bool(result))
     return bool(result)
 
 
-#if
-expr = "!defined(AAA) && F > H +"
+#if !defined(AAA) && F > H
+expr = "!defined(AAA) && F > H"
 c_eval(expr)
